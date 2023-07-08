@@ -17,6 +17,12 @@ struct ContentView: View {
             AddRecipeView().tabItem {
                 Text("Add Recipe")
             }
+            
+            TestView().tabItem {
+                Text("Test")
+            }
+            
+            
         }
     }
 }

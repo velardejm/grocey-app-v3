@@ -48,6 +48,7 @@ struct AddRecipeView: View {
                 }
                 
                 Button("Save Recipe") {
+                    try? moc.save()
                     recipeName = ""
                     ingredientName = ""
                     quantity = nil

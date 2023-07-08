@@ -1,0 +1,5 @@
+[
+    {"id": 1, "name": "chicken", "category":"poultry"},
+    {"id": 2, "name": "chicken wings", "category":"poultry"},
+    {"id": 3, "name": "apple", "category":"fruits"}
+]
