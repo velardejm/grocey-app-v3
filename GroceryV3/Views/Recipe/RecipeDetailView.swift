@@ -12,17 +12,19 @@ struct RecipeDetailView: View {
     @State var recipe:Recipe
     
     var body: some View {
+        
         List {
             Section {
                 Text(recipe.wrappedName)
             }
             
             Section {
-                ForEach(recipe.ingredientArray, id: \.self) {ingredient in
+                ForEach(recipe.ingredientsArray, id: \.self) {ingredient in
                     Text(ingredient.wrappedName)
                 }
             }
         }
+        
     }
 }
 

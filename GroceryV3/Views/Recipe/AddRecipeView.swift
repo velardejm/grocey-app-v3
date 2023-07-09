@@ -9,16 +9,20 @@ import SwiftUI
 
 struct AddRecipeView: View {
     @Environment(\.managedObjectContext) var moc
+    @Environment(\.dismiss) var dismiss
     
     @State private var recipeName = ""
     @State private var ingredientName = ""
     @State private var quantity: Float? = nil
     @State private var unit = ""
+    @State private var category = "others"
     
     @State private var newRecipe: Recipe? = nil
-    
+     
     var body: some View {
-        List {
+        
+        return List {
+            
             Section {
                 TextField("Recipe Name", text:$recipeName)
             }
@@ -27,6 +31,11 @@ struct AddRecipeView: View {
                 TextField("Ingredient Name", text:$ingredientName)
                 TextField("Quantity", value:$quantity, format: .number)
                 TextField("Unit", text:$unit)
+                Picker("Category", selection: $category) {
+                    ForEach(categories, id: \.name) {category in
+                        Text(category.name)
+                    }
+                }
                 
                 Button("Add Ingredient") {
                     if newRecipe == nil {
@@ -48,16 +57,14 @@ struct AddRecipeView: View {
                 }
                 
                 Button("Save Recipe") {
-                    try? moc.save()
-                    recipeName = ""
-                    ingredientName = ""
-                    quantity = nil
-                    newRecipe = nil
+                    // try? moc.save()
+                    dismiss()
+                    
                 }
             }
             
             Section {
-                if let ingredients = newRecipe?.ingredientArray {
+                if let ingredients = newRecipe?.ingredientsArray {
                     ForEach(ingredients, id: \.self) {ingredient in
                         Text(ingredient.wrappedName)
                     }

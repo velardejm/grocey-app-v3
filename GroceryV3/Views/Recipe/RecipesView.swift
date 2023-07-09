@@ -10,18 +10,39 @@ import SwiftUI
 struct RecipesView: View {
     @Environment(\.managedObjectContext) var moc
     
+    @EnvironmentObject var navPath: NavPath
+    
     @FetchRequest(sortDescriptors: []) var recipes: FetchedResults<Recipe>
     
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $navPath.navPath) {
             List {
-                ForEach(recipes, id: \.self) {recipe in
-                    NavigationLink {
+                if recipes.count > 0 {
+                    ForEach(recipes, id: \.self) {recipe in
+                        NavigationLink(value: recipe) {
+                            Text(recipe.wrappedName)
+                        }
+                    }.navigationDestination(for: Recipe.self) {recipe in
                         RecipeDetailView(recipe: recipe)
-                    } label: {
-                        Text(recipe.wrappedName)
                     }
                 }
+            }.toolbar {
+                ToolbarItem {
+                    Button {
+                        navPath.navPath.append("Add Recipe")
+                    } label: {
+                        HStack {
+                            Text("Add Recipe")
+                            Label("Add Recipe", systemImage: "plus")
+                        }
+                    }
+                }
+            }
+            
+            NavigationLink(value:"Add Recipe") {
+                EmptyView()
+            }.navigationDestination(for: String.self) {text in
+                AddRecipeView()
             }
         }
     }

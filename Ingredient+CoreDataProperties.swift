@@ -2,7 +2,7 @@
 //  Ingredient+CoreDataProperties.swift
 //  GroceryV3
 //
-//  Created by JM Velarde on 7/7/23.
+//  Created by JM Velarde on 7/8/23.
 //
 //
 
@@ -19,6 +19,7 @@ extension Ingredient {
     @NSManaged public var name: String?
     @NSManaged public var quantity: Float
     @NSManaged public var unit: String?
+    @NSManaged public var category: String?
     @NSManaged public var recipe: Recipe?
     
     public var wrappedName: String {
@@ -26,7 +27,11 @@ extension Ingredient {
     }
     
     public var wrappedUnit: String {
-        unit ?? "Unknown Unit"
+        unit ?? ""
+    }
+    
+    public var wrappedCategory: String {
+        category ?? ""
     }
 
 }

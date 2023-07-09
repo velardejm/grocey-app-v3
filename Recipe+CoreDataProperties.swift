@@ -2,7 +2,7 @@
 //  Recipe+CoreDataProperties.swift
 //  GroceryV3
 //
-//  Created by JM Velarde on 7/7/23.
+//  Created by JM Velarde on 7/8/23.
 //
 //
 
@@ -23,7 +23,7 @@ extension Recipe {
         name ?? "Unknown Recipe"
     }
     
-    public var ingredientArray: [Ingredient] {
+    public var ingredientsArray: [Ingredient] {
         let set = ingredient as? Set<Ingredient> ?? []
         return set.sorted {
             $0.wrappedName < $1.wrappedName

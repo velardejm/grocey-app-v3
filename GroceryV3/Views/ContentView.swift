@@ -8,22 +8,18 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var navPath = NavPath()
+    
     var body: some View {
         TabView {
             RecipesView().tabItem {
                 Text("Recipes")
             }
             
-            AddRecipeView().tabItem {
-                Text("Add Recipe")
-            }
-            
             TestView().tabItem {
                 Text("Test")
             }
-            
-            
-        }
+        }.environmentObject(navPath)
     }
 }
 
